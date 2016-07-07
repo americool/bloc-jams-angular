@@ -86,6 +86,25 @@
                 playSong(song);
             }
         }
+/**
+* @function SongPlayer.next
+* @like the .previous function, but you know ...goes to the next song.
+*/        
+           
+        SongPlayer.next = function() {
+            var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+            currentSongIndex++; 
+            
+            if (currentSongIndex > currentAlbum.songs.length - 1) {
+                currentBuzzObject.stop(); 
+                SongPlayer.currentSong.playing = null; 
+            }
+            else {
+                var song = currentAlbum.songs[currentSongIndex];
+                setSong(song);
+                playSong(song);
+            }
+        }
         
         return SongPlayer; 
     }
