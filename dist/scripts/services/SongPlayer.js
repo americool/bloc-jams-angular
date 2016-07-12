@@ -56,7 +56,9 @@
 */
         var playSong = function(song){
             currentBuzzObject.play(); 
-            song.playing = true; 
+            song.playing = true;
+            currentBuzzObject.setVolume(SongPlayer.volume);
+            
         }
 /**
 * @function stopSong
@@ -74,7 +76,7 @@
 */
         SongPlayer.currentTime = null;
         SongPlayer.volume = 80; 
-        
+//        currentBuzzObject.setVolume(80);
 /** 
 * @function setCurrentTime
 * @desc Set current time (in seconds) of currently playing song
@@ -99,12 +101,17 @@
                 setSong(song);
                 playSong(song);
             }
-            
+            else if (!currentBuzzObject) {
+                setSong(currentAlbum.songs[0]);
+                playSong(currentAlbum.songs[0]);
+            }
             else if (SongPlayer.currentSong === song) {
                 if (currentBuzzObject.isPaused()) {
                     playSong(song);
                 }
             }
+           
+                
         };
         
         SongPlayer.pause = function(song) {
